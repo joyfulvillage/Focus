@@ -34,14 +34,14 @@ trait Lens[A, B] {
   /** modify target value B and return a new container A */
   def modify(f: B => B, a: A): A
 
-  /** modify target value B using [[Functor]] function and return a new container A */
+  /** modify target value B using Functor function and return a new container A */
   def modifyF[F[_]: Functor](f: B => F[B], a: A): F[A]
 
-  /** cast to [[State]] */
+  /** cast to State */
   def asState: State[A, B] = State(a => (a, get(a)))
 
   /**
-   * modify new B and cast to [[State]], as generator in for-comprehension
+   * modify new B and cast to State, as generator in for-comprehension
    * {{{
    *   val a = Article(1, "A Brief History of Time", "Stephen")
    *
